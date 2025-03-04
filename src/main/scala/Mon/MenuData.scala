@@ -3,6 +3,7 @@ package Mon
 // My MenuData object contains a list of MenuItem instances as working with collections of case classes means I can filter, map and fold using standard collection methods.
 //Enhances safety.
 //Code is more maintainable as its a cafe they may want to change their menu.
+class MenuData (val menuItems: List[MenuItem]) //menu items declared in my objects
 
 object MenuData {
   val menuItems: List[MenuItem] = List (
@@ -20,6 +21,9 @@ object MenuData {
     MenuItem ("Salad", 5.50, "Lunch", isSpecial = false, 6),
     MenuItem ("Panini", 5.50, "Lunch", isSpecial = false, 7),
   )
+
+  val bagel = MenuItem ("Bagel", 5.50, "Lunch", isSpecial = true, 7)
+
   //get a printline but no runnable button on this page
   println (MenuItem("Croissant", 2.50, "Bakery", isSpecial = false, 10))
   menuItems.foreach(println)
