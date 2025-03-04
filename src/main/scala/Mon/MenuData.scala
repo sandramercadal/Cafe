@@ -24,15 +24,8 @@ object MenuData {
     MenuItem ("Panini", 5.50, "Lunch", isSpecial = false, 7),
   )
 
+  //true values
   val bagel = MenuItem ("Bagel", 5.50, "Lunch", isSpecial = true, 7)
   val tea = MenuItem ("Tea", 2.50, "Beverages", isSpecial = true, 100)
-
-
-  //get a printline but no runnable button on this page
-  //menuItems.foreach(println)
-//(menuItems.foreach => println (s" The cafe sells (item.name)")) Not sure this works
-
-
-
 
 }
