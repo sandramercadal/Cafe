@@ -25,20 +25,22 @@ class CafeLogic {
   // SUMMARY: Filtering list to exclude specials
 
 
-  /** DEF to STOCK COUNT.
+  /** DEF to STOCK COUNT.  /** Y E T TO  BE PRITLN. Fedback welcome*/
    * If item is at stock count = 0 you cannot order it. When an item is bought, reduce the stock by -1
    * I found .stock a shorthand notation that refers to a property of an object inside a collection.
    * Wanted to use .copy here */
 
-    /** Y E T TO  BE PRITLN */
+
   def customerOrder(itemName: String, menuItems: List[MenuItem]): List[MenuItem] = { //take in itemMName and a list of MenuItem objects
-    val updatedStock = menuItems.map { item =>   //map thorugh each item in menuItems list
-      if (item.name.equalsIgnoreCase(itemName) && item.stock > 0) {  //for each item, checks item name & stock is greater than zero. If both true reduce stock by creating a copy and updates stock
+    val updatedStock = menuItems.map { item => //map thorugh each item in menuItems list
+      if (item.name.equalsIgnoreCase(itemName) && item.stock > 0) { //for each item, checks item name & stock is greater than zero. If both true reduce stock by creating a copy and updates stock
         item.copy(stock = item.stock - 1)
       } else {
         item
       }
     }
+  }
+}
 
     //Could use some and none match cases?
     // OPTIONS here
