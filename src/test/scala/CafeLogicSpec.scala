@@ -17,6 +17,11 @@ class CafeLogicSpec extends AnyWordSpec with Matchers {
   //Represents initial order
   val justDrinkOrder: List[MenuItem] = List(HotChocolate)
 
+
+  //caps, lowercase, same name, if you a
+
+
+
   //MY TESTS
   //Test Case 1- can a special item (Wrap) be added to justDrinkOrder
   "addSpecial" should {
