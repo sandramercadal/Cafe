@@ -53,25 +53,25 @@ class CafeLogicSpec extends AnyWordSpec with Matchers {
     }
   }
 
-//Test Case 5- Add a special to an empty order list
+  //Test Case 5- Add a special to an empty order list
   "addSpecialToEmptyOrder" should {
     "test if a special can be added to an empty order" in {
-      val emptyOrder: List[MenuItem] = List ()
+      val emptyOrder: List[MenuItem] = List()
       val addAWrap = cafeLogic.addSpecial(Wrap, emptyOrder)
       val expectedResult = List(Wrap)
     }
   }
 
-//Test Case 6- Add a non-special to an empty order list
+  //Test Case 6- Add a non-special to an empty order list
   "addNonSpecialToEmptyOrder" should {
     "test if a non-special can be added to an empty order" in {
-      val emptyOrder: List[MenuItem] = List ()
+      val emptyOrder: List[MenuItem] = List()
       val addAWrap = cafeLogic.addSpecial(Coffee, emptyOrder)
       val expectedResult = List(Coffee)
     }
   }
 
-//Test Case 7- Test adding more than one non-special item as customer may want 2 donuts etc
+  //Test Case 7- Test adding more than one non-special item as customer may want 2 donuts etc
   "addAnotherNonSpecial" should {
     "test if the non-special same item can be added to order as customer may want more than 1" in {
       val addADonut = cafeLogic.addSpecial(Donut, justDrinkOrder) //call it
@@ -81,7 +81,7 @@ class CafeLogicSpec extends AnyWordSpec with Matchers {
   }
 
   //Test Case 8- Test adding more than one special item as customer may want 2 wraps
-    "addAnotherSpecial" should {
+  "addAnotherSpecial" should {
     "test if the special same item can be added to order as customer may want more than 1" in {
       val addAWrap = cafeLogic.addSpecial(Wrap, justDrinkOrder) //call it
       val addAnotherWrap = cafeLogic.addSpecial(Wrap, addAWrap) //call it
@@ -89,13 +89,16 @@ class CafeLogicSpec extends AnyWordSpec with Matchers {
     }
   }
 
-  //Test Case 9- Add an invalid menu item. HOW TO DO THIS??
-
-
-
-
-// Test case 10 - edge cases - order an out of stock item
-
+  //EDGE CASE - FAILS
+  //Test Case 9- Add an invalid menu item / Out of stock
+  //There is a method called assertThrows[IllegalArgumentException]
+  "InvalidMenuItem" should {
+"test if adding an item which is out of stock or null returns an error" in {
+  assertThrows[IllegalArgumentException] {
+    cafeLogic.addSpecial(null, justDrinkOrder) //
+  }
+}
+  }
 
 
 
