@@ -13,10 +13,10 @@ class CafeLogicSpec extends AnyWordSpec with Matchers {
   val Coffee = new MenuItem("Coffee", 2.50, "Beverages", isSpecial = false, 30)
   val Wrap = new MenuItem("Wrap", 5.00, "Lunch", isSpecial = true, 12)
 
+  //Represents initial order
+  val justDrinkOrder: List[MenuItem] = List(HotChocolate)
 
   //MY TESTS
-  val justDrinkOrder: List[MenuItem] = List(HotChocolate) //Represents initial order
-
   //Test Case 1- can a special item (Wrap) be added to justDrinkOrder
   "addSpecial" should {
     "test if a special item has been added to order" in {
@@ -56,7 +56,7 @@ class CafeLogicSpec extends AnyWordSpec with Matchers {
 //Test Case 5- Add a special to an empty order list
   "addSpecialToEmptyOrder" should {
     "test if a special can be added to an empty order" in {
-      val emptyOrder: List[MenuItem] = List () //
+      val emptyOrder: List[MenuItem] = List ()
       val addAWrap = cafeLogic.addSpecial(Wrap, emptyOrder)
       val expectedResult = List(Wrap)
     }
@@ -65,25 +65,40 @@ class CafeLogicSpec extends AnyWordSpec with Matchers {
 //Test Case 6- Add a non-special to an empty order list
   "addNonSpecialToEmptyOrder" should {
     "test if a non-special can be added to an empty order" in {
-      val emptyOrder: List[MenuItem] = List () //
+      val emptyOrder: List[MenuItem] = List ()
       val addAWrap = cafeLogic.addSpecial(Coffee, emptyOrder)
       val expectedResult = List(Coffee)
     }
   }
 
-//Test Case 7- Add an invalid menu item
+//Test Case 7- Test adding more than one non-special item as customer may want 2 donuts etc
+  "addAnotherNonSpecial" should {
+    "test if the non-special same item can be added to order as customer may want more than 1" in {
+      val addADonut = cafeLogic.addSpecial(Donut, justDrinkOrder) //call it
+      val addAnotherDonut = cafeLogic.addSpecial(Donut, addADonut) //call it
+      val expectedResult = List(Donut, Donut, HotChocolate)
+    }
+  }
+
+  //Test Case 8- Test adding more than one special item as customer may want 2 wraps
+    "addAnotherSpecial" should {
+    "test if the special same item can be added to order as customer may want more than 1" in {
+      val addAWrap = cafeLogic.addSpecial(Wrap, justDrinkOrder) //call it
+      val addAnotherWrap = cafeLogic.addSpecial(Wrap, addAWrap) //call it
+      val expectedResult = List(Wrap, Wrap, HotChocolate)
+    }
+  }
+
+  //Test Case 9- Add an invalid menu item. HOW TO DO THIS??
 
 
-//Test Case 8- Test if adding something in an order already works as customer may want 2 Lattes
+
+
+// Test case 10 - edge cases - order an out of stock item
+
 
 
 
 }
 
-/**
- * Add a new menu item to the list and Test for it
- * Test for all the items that are beverages
- * Get a recipts
- * edge cases - order an out of stock item
- */
 
