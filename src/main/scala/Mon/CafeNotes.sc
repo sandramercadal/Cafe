@@ -22,16 +22,16 @@
  *Q3
 *Track inventory/Stock count of menu items
  *Cannot order something that is out of stock - need a counter to map to items in stock
-*/
 
+/**BILL
 /** Take customer orders
  * Add up the total
  * Add an optional service charge
  * */
 
 
-/** manage the Service Charge - TUES??
- * Do not apply it
+/** manage the Service Charge -
+ * Do not apply it on drinks
  * Add 10% to cold food orders
  * Add 20% to hot food orders
  * Add 25% to premium special orders

@@ -1,15 +1,18 @@
 package Mon
 
-//Update the name of my menu.scala to MenuItem.scala - ISSUES ASK APRIL
+//CafeLogic class - a Single responsibility for all the operation I want to perform on MenuData
+//Reusable if in futher the cafe wants to expand its operations & manage diff menus or cafes
 
 class CafeLogic {
 
-  /** DEF function to ADD SPECIAL ITEM e.g Luxury Hot Chocolate */
-  def addSpecial(menuItem: MenuItem, updatedMenu: List[MenuItem]): List[MenuItem] = { //passing in our menu item, where to put it?
+  /** Function to ADD A NEW SPECIAL ITEM to list of menu items e.g add Luxury Hot Chocolate */
+  def addSpecial(menuItem: MenuItem, updatedMenu: List[MenuItem]): List[MenuItem] = { //passing in our new menu item,
 
-   (updatedMenu :+ menuItem) //Like we did with cats and Birds in Kennel
-
+   (updatedMenu :+ menuItem) // (:+ append this list to the left) appends menuItem to updatedMenu and returns a new list with original list plus new item
   }
+
+
+
 //println (addSpecial(MenuData.bagel, MenuData.menuItems))
   /**   Test a special to the list of all the other cafe Items   */
   //MenuData.addSpecial("Luxury Hot Chocolate", 4.25, "Beverages")
