@@ -2,9 +2,11 @@ package Mon
 
 // My MenuData object contains a list of MenuItem instances as working with collections of case classes means I can filter, map and fold using standard collection methods.
 //Enhances safety.
-//Code is more maintainable as its a cafe they may want to change their menu.
-class MenuData (val menuItems: List[MenuItem]) //menu items declared in my objects
+//Code is more maintainable as it's a cafe they may want to change their menu.
+class MenuData (val menuItems: List[MenuItem]) //my class takes a parameter of menuItems which is a list of menuItem. If I need to create an instance of MenuData I need to provide a list of MenuItem objects
 
+
+//Single instance of my class containing my static list of menuItems predefined with several items like Latte and Donut already
 object MenuData {
   val menuItems: List[MenuItem] = List (
     MenuItem ("Croissant", 2.50, "Bakery", isSpecial = false, 10),
