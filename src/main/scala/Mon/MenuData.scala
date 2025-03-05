@@ -22,6 +22,7 @@ object MenuData {
     MenuItem ("Wrap", 5.00, "Lunch", isSpecial = false, 12),
     MenuItem ("Salad", 5.50, "Lunch", isSpecial = false, 6),
     MenuItem ("Panini", 5.50, "Lunch", isSpecial = false, 7),
+    MenuItem ("Churros", 5.50, "Lunch", isSpecial = false, 0),
   )
 
   //true values
