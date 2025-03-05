@@ -17,12 +17,7 @@ class CafeLogicSpec extends AnyWordSpec with Matchers {
   //Represents initial order
   val justDrinkOrder: List[MenuItem] = List(HotChocolate)
 
-
-  //caps, lowercase, same name, if you a
-
-
-
-  //MY TESTS
+  //MY TESTS FOR MENU
   //Test Case 1- can a special item (Wrap) be added to justDrinkOrder
   "addSpecial" should {
     "test if a special item has been added to order" in {
@@ -95,7 +90,21 @@ class CafeLogicSpec extends AnyWordSpec with Matchers {
     }
   }
 
-//Test Case 9- FAILS
+  //Test Case 9- Test that STOCK can decrease when item is bought by customer
+  //"customerOrderFromMenu" should {
+    //"test if the stock decreases when an item is ordered" in {
+      //val decreaseStock = cafeLogic.customerOrderFromMenu(HotChocolate, justDrinkOrder)
+      //val expectedResult = List(Wrap, HotChocolate)
+    //}
+  //}
+
+  //Could also have a test that should pass if it does not decrease stock if item is out of stock
+
+  //ALSO Stock should not change if it is not ordered
+
+
+
+//Test Case- FAILS
   //"outOfStock" should {
     //"test if the ordered item is out of stock" in {
       //val outOfStockItem = new MenuItem ("Bun", 5.00, "Lunch", isSpecial = true, 0) //out of stock
@@ -104,7 +113,7 @@ class CafeLogicSpec extends AnyWordSpec with Matchers {
         //cafeLogic.addSpecial(outOfStockItem, justDrinkOrder)
 
 
-  //EDGE CASE - FAILS
+  //EDGE CASE- FAILS
   //Test Case 10- Add an invalid menu item / Out of stock
   //There is a method called assertThrows[IllegalArgumentException]
   //"InvalidMenuItem" should {

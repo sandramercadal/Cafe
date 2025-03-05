@@ -12,7 +12,6 @@ class CafeLogic {
     (menu :+ menuItem) // (:+ append this list to the left) so menuItem to updatedMenu, returns a new list incl. original list plus new item
   }
 
-
   /** DEF function to REMOVE SPECIAL ITEM.
    * Made the method as generic as possible
    * match names to lower case names for all edge cases
@@ -41,7 +40,7 @@ class CafeLogic {
     }
     updatedStock //Important to return at the end!
   }
-}
+
 
 //Could use some and none match cases?
 // OPTIONS here
@@ -59,6 +58,7 @@ class CafeLogic {
 
 
  * */
+}
 object CafeLogic extends App {
 
   //ADD A SPECIAL
