@@ -25,7 +25,7 @@ class CafeLogic {
   // SUMMARY: Filtering list to exclude specials
 
 
-  /** DEF to STOCK COUNT.  /** Y E T TO  BE PRITLN. Fedback welcome*/
+  /** DEF to STOCK COUNT.  /** Y E T TO  BE PRITLN. Feedback/tips on how to make this work welcome🙏*/
    * If item is at stock count = 0 you cannot order it. When an item is bought, reduce the stock by -1
    * I found .stock a shorthand notation that refers to a property of an object inside a collection.
    * Wanted to use .copy here */
@@ -42,31 +42,36 @@ class CafeLogic {
   }
 }
 
-    //Could use some and none match cases?
-    // OPTIONS here
-    //Could add stock : Int = 10 to the case class (Menu.scala) and then use .copy stock -1 each time as case items
+//Could use some and none match cases?
+// OPTIONS here
+//Could add stock : Int = 10 to the case class (Menu.scala) and then use .copy stock -1 each time as case items
 
-    //def totalStockCount: Int = {
-    //menuItems.map(_.stock).sum //map over all my  (_.stock for each element in the collection) and add up
+//def totalStockCount: Int = {
+//menuItems.map(_.stock).sum //map over all my  (_.stock for each element in the collection) and add up
 
-    //list is 10 of each, place an order -1  and return a list with an order
-    //map
-    //item => - 1
-
-
-
-    /** DEF to TAKE CUSTOMER ORDER, GIVE ITEMISED BILL with a TOTAL */
-    //def customerBill()
+//list is 10 of each, place an order -1  and return a list with an order
+//map
+//item => - 1
 
 
-    object CafeLogic extends App {
+/** DEF to TAKE CUSTOMER ORDER, GIVE ITEMISED BILL with a TOTAL
+ * Needs to accept the list of menu items and the customer order
+ * Look at each menu in the item
+ *
+ * def customerOrder(order: List[String]: (List[String], Double) = {
+ *
+ *}
+ *
+ *
+ * */
+object CafeLogic extends App {
 
-      //ADD A SPECIAL
-      val cafe = new CafeLogic //instance of a class - since it is a normal class we need "new" when instantiating an object. Don't need new for case class.
-      val addSpecial = cafe.addSpecial(MenuData.bagel, MenuData.menuItems) //added a bagel to addSpecial
-      println(addSpecial)
+  //ADD A SPECIAL
+  val cafe = new CafeLogic //instance of a class - since it is a normal class we need "new" when instantiating an object. Don't need new for case class.
+  val addSpecial = cafe.addSpecial(MenuData.bagel, MenuData.menuItems) //added a bagel to addSpecial
+  println(addSpecial)
 
-      //REMOVE A SPECIAL
-      val removeSpecial = cafe.removeSpecial("bagel", addSpecial)
-      println(removeSpecial)
-    }
+  //REMOVE A SPECIAL
+  val removeSpecial = cafe.removeSpecial("bagel", addSpecial)
+  println(removeSpecial)
+}
