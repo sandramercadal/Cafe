@@ -136,9 +136,11 @@ class CafeLogicSpec extends AnyWordSpec with Matchers {
 //    }
 //  }
 
-  //Test if an empty order returns an empty bill
-  //Test if an item ordered not on the menu is ignored
-  //
+  /** Further tests for stock can be:
+   1. Test if an empty order returns an empty bill
+  2. Test if an item ordered not on the menu is ignored
+   */
+
 
 }
 
