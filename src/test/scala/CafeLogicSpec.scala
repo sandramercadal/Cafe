@@ -7,7 +7,6 @@ class CafeLogicSpec extends AnyWordSpec with Matchers {
   val cafeLogic = new CafeLogic
 
   //Define menu items, Wrap and Luxury Hot choc are special items
-
   val Wrap = new MenuItem("Wrap", 5.00, "ColdFood", isSpecial = true, 12)
   val LuxuryHotChocolate = new MenuItem("Luxury Hot Chocolate", 4.75, "Drinks", isSpecial = true, 10)
 
@@ -17,16 +16,13 @@ class CafeLogicSpec extends AnyWordSpec with Matchers {
   val Mocha = new MenuItem("Mocha", 3.50, "Drinks", isSpecial = false, 15)
 
   val emptyOrder: List[MenuItem] = List()
+
   //Represents initial order
   val justDrinkOrder: List[MenuItem] = List(Coffee)
 
-  val order: List [String] = List ("Salad", "Churros", "Salad") //Bill
+  val order: List[String] = List("Salad", "Hot Churros", "Salad") //Bill testing
 
-
-  //  //Represents further orders
-  //val multipleItemsInOrder: List[MenuItem] = List(HotChocolate, Donut)
-
-  //MY TESTS FOR MENU
+  //MY TESTS FOR MENU 8 of 8 run
   //Test Case 1- can a special item (Wrap) be added to justDrinkOrder
   "addSpecial" should {
     "test if a special item has been added to order" in {
@@ -53,10 +49,10 @@ class CafeLogicSpec extends AnyWordSpec with Matchers {
       addWrap shouldBe expectedResult
     }
     "test if another special item has been added to the order" in {
-    val addLuxuryHotChocolate = cafeLogic.addSpecial(LuxuryHotChocolate, justDrinkOrder) //call it
-    val expectedResult = List(Coffee, LuxuryHotChocolate)
-    addLuxuryHotChocolate shouldBe expectedResult
-  }
+      val addLuxuryHotChocolate = cafeLogic.addSpecial(LuxuryHotChocolate, justDrinkOrder) //call it
+      val expectedResult = List(Coffee, LuxuryHotChocolate)
+      addLuxuryHotChocolate shouldBe expectedResult
+    }
   }
 
   //Test Case 4- Can multiple non-specials be added to JustDrinkOrder
@@ -81,7 +77,7 @@ class CafeLogicSpec extends AnyWordSpec with Matchers {
       val addAWrap = cafeLogic.addSpecial(Wrap, emptyOrder)
       val expectedResult = List(Wrap)
       addAWrap shouldBe expectedResult
-      }
+    }
   }
 
   //Test Case 6- Add a non-special to an empty order list
@@ -114,44 +110,53 @@ class CafeLogicSpec extends AnyWordSpec with Matchers {
     }
   }
 
+  //MY TESTS FOR BILL
+//  "getBill" should {
+//    "provide correct itemised bill for correct items ordered" in {
+//      val customerOrder = List("Salad", "Hot Churros", "Salad")
+//      val bill = GetCustomerBill(order)
+//      val expectedItemisedBill = List("Salad: £5.50", "Hot churros: £5.50", "Salad: £5.50")
+//      customerOrder shouldBe expectedItemisedBill
+//    }
+//  }
 
+  //Test if an empty order returns an empty bill
+  //Test if an item ordered not on the menu is ignored
+  //
 
-  //Test Case 9- Test that STOCK can decrease when item is bought by customer
-  "customerOrderFromMenu" should {
-    "test if the stock decreases when an item is ordered" in {
-      val updatedOrder = cafeLogic.addSpecial(Coffee, justDrinkOrder)
-      val expectedResult = List(Coffee, Wrap)
-      decreaseStock shouldBe expectedResult
+  /** Stock* */
+    //Test Case 1- Test that STOCK can decrease when non-special item is bought by customer
+    "customerOrderFromMenu" should {
+      "test if the stock decreases when an item is ordered" in {
+        val initialOrder = List(MenuItem("Salad", 5.50, "ColdFood", isSpecial = false, stock = 6))
+        val updatedOrder = cafeLogic.customerOrderFromMenu("Salad", initialOrder)
+        val expectedResult = List(MenuItem("Salad", 5.50, "ColdFood", isSpecial = false, stock = 5))
+        updatedOrder shouldBe expectedResult
+      }
     }
-  }
+  /** Further tests for stock can be:
+   * A test that should pass if it does not decrease stock if item is out of stock
+   * A test for stock should not change if it is not ordered
+   */
 
-  //Could also have a test that should pass if it does not decrease stock if item is out of stock
-
-  //ALSO Stock should not change if it is not ordered
-
-
-
-//Test Case- FAILS
+  //Test Case 2- FAILS
   //"outOfStock" should {
-    //"test if the ordered item is out of stock" in {
-      //val outOfStockItem = new MenuItem ("Bun", 5.00, "Lunch", isSpecial = true, 0) //out of stock
-      //val orderABun : List[MenuItem] = List (outOfStockItem) //new order woth out of stock item
-      //assertThrows[outOfStockItem] {
-        //cafeLogic.addSpecial(outOfStockItem, justDrinkOrder)
+  //"test if the ordered item is out of stock" in {
+  //val outOfStockItem = new MenuItem ("Bun", 5.00, "Lunch", isSpecial = true, 0) //out of stock
+  //val orderABun : List[MenuItem] = List (outOfStockItem) //new order woth out of stock item
+  //assertThrows[outOfStockItem] {
+  //cafeLogic.addSpecial(outOfStockItem, justDrinkOrder)
 
-
-  //EDGE CASE- FAILS
+  //EDGE CASE 3- FAILS
   //Test Case 10- Add an invalid menu item / Out of stock
   //There is a method called assertThrows[IllegalArgumentException]
   //"InvalidMenuItem" should {
-//"test if adding an item which is out of stock or null returns an error" in {
+  //"test if adding an item which is out of stock or null returns an error" in {
   //assertThrows[IllegalArgumentException] {
-    //cafeLogic.addSpecial(null, justDrinkOrder) //
-
-
-
+  //cafeLogic.addSpecial(null, justDrinkOrder) //
 
 
 }
+
 
 

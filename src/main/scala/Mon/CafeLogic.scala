@@ -42,31 +42,27 @@ class CafeLogic {
   }
 
 
-
-  //Could use some and none match cases?
-  // OPTIONS here
-
   /** DEF to TAKE CUSTOMER ORDER, GIVE ITEMISED BILL with a TOTAL
    * Needs to accept the list of menu items and the customer order
    * Look at each menu in the item
-   * Use of flat map to flatten any none result in final list*/
+   * Use of flat map to flatten any none result in final list */
 
-  class Bill (itemisedBill: List [String], total : Double)
+  class Bill(itemisedBill: List[String], total: Double) //class represents a bill that contain 2 params: Itemised bill and total (Double)
 
-  def GetCustomerBill(order: List[String]): Bill =  {
+  def GetCustomerBill(order: List[String]): Bill = { //
 
-    val itemisedBill = order.flatMap { itemName =>
-      menuItems.find(_.name.equalsIgnoreCase(itemName)).map { item =>
+    val itemisedBill = order.flatMap { itemName =>  //use flatmap to flatten
+      menuItems.find(_.name.equalsIgnoreCase(itemName)).map { item => //search for a matching item in MenuItems & do a case-insensitive match
         s"${item.name}: £${item.price}"
       }
     }
-    val priceTotal = order.map { itemName => menuItems.find(_.name.equalsIgnoreCase(itemName)).map {item => item.price}.sum}
-
+    val priceTotal = order.map { itemName => menuItems.find(_.name.equalsIgnoreCase(itemName)).map { item => item.price }.sum }
     val totalCost = priceTotal.sum
-    new Bill (itemisedBill, totalCost)
+    new Bill(itemisedBill, totalCost)
   }
 
 }
+
 
 object CafeLogic extends App {
 
@@ -83,6 +79,6 @@ object CafeLogic extends App {
   //Check if things are in stock, if they are, MenuItem objects (Churros and Croissant). One is in stock only.
   val menu = List(MenuItem("Croissant", 2.50, "Bakery", isSpecial = false, 10), MenuItem("Churros", 5.50, "Lunch", isSpecial = false, 0))
   val updatedMenu = cafe.customerOrderFromMenu("Croissant", menu) //call customerOrderFromMenu. Want to order 1 croissant from "menu" list I created
-println(menu)
+  println(menu)
 
 }

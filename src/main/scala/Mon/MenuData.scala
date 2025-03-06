@@ -11,9 +11,7 @@ object MenuData {
   val menuItems: List[MenuItem] = List (
     MenuItem ("Croissant", 2.50, "ColdFood", isSpecial = false, 10),
     MenuItem ("bagel", 2.00, "ColdFood", isSpecial = false, 10),
-    MenuItem ("Muffin", 2.50, "ColdFood", isSpecial = false, 15),
     MenuItem ("Donut", 2.50, "ColdFood", isSpecial = false, 12),
-    MenuItem ("Sandwich", 5.50, "ColdFood", isSpecial = false, 10),
     MenuItem ("Wrap", 5.00, "ColdFood", isSpecial = false, 12),
     MenuItem ("Salad", 5.50, "ColdFood", isSpecial = false, 6),
     MenuItem ("Mocha", 3.50, "Drinks", isSpecial = false, 15),
