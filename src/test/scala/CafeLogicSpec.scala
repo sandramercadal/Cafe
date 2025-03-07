@@ -159,6 +159,16 @@ class CafeLogicSpec extends AnyWordSpec with Matchers {
    */
 
 
+  /** S E R V I C E  C H A R G E **
+   * 1: Total with just drinks
+   * 2. Total with cold food and drinks (10%)
+   * 3. Total with hot food and drinks (20%)
+   * 4. Total of special food and drinks (25%)
+   * 5. Total with custom service charge
+   */
+
+
+
 }
 
 
