@@ -8,7 +8,7 @@ class CafeLogicSpec extends AnyWordSpec with Matchers {
 
   val cafeLogic = new CafeLogic
 
-  //Define menu items, Wrap 🌯 and Luxury Hot choc ☕️ are special items
+  //Define menu items, Wrap 🌯 & Luxury Hot choc ☕️ are special items
   val Wrap = new MenuItem("Wrap", 5.00, "ColdFood", isSpecial = true, 12)
   val LuxuryHotChocolate = new MenuItem("Luxury Hot Chocolate", 4.75, "Drinks", isSpecial = true, 10)
 
@@ -136,7 +136,6 @@ class CafeLogicSpec extends AnyWordSpec with Matchers {
       updatedOrder shouldBe expectedResult
     }
   }
-
   /** Further tests for stock can be:
    * A test that should pass if it does not decrease stock if item is out of stock
    * A test for stock should not change if it is not ordered
@@ -154,9 +153,9 @@ class CafeLogicSpec extends AnyWordSpec with Matchers {
 //      }
 //    }
 
-  /** Further tests for stock can be:
-   * 1. Test if an empty order returns an empty bill
-   * 2. Test if an item ordered not on the menu is ignored
+  /** Further tests for Bill can be:
+   * 1.
+   * 2.
    */
 
 
