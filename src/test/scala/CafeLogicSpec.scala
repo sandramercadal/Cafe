@@ -153,12 +153,6 @@ class CafeLogicSpec extends AnyWordSpec with Matchers {
       }
     }
 
-  /** Further tests for Bill can be:
-   * 1.
-   * 2.
-   */
-
-
   /** S E R V I C E  C H A R G E **
    * 1: Total with just drinks
    * 2. Total with cold food and drinks (10%)
