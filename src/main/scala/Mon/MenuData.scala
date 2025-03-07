@@ -26,8 +26,4 @@ object MenuData {
     MenuItem ("Sangria", 4.50, "Drinks", isSpecial = true, 25),
   )
 
-  //true values
-  val bagel = MenuItem ("Bagel", 5.50, "Lunch", isSpecial = true, 7)
-  val tea = MenuItem ("Tea", 2.50, "Beverages", isSpecial = true, 100)
-
 }

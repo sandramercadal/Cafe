@@ -21,26 +21,26 @@ class OrderList(val menuList: List[MenuItem]) {
 
 
     val optionalServiceCharge: Option[Double] =
-      if (menuList.exists(_.isSpecial)) Some(total * 0.25)
-      else if (menuList.exists(_.category == "HotFood")) Some(total * 0.20)
-      else if (menuList.exists(_.category == "ColdFood")) Some(total * 0.10)
-      else None
-
-    val serviceCharge = optionalServiceCharge.getOrElse(0.0)
-
-    total + serviceCharge
-  }
-
-
-  val myOrder = new OrderList(orderList)
-  val totalCost = myOrder.billWithServiceCharge()
-  println(f"Total bill with service charge: £${totalCost}%.2f")
-
+//      if (menuList.exists(_.isSpecial)) Some(total * 0.25)
+//      else if (menuList.exists(_.category == "HotFood")) Some(total * 0.20)
+//      else if (menuList.exists(_.category == "ColdFood")) Some(total * 0.10)
+//      else None
+//
+//    val serviceCharge = optionalServiceCharge.getOrElse(0.0)
+//
+//    total + serviceCharge
+//  }
+//
+//
+//  val myOrder = new OrderList(orderList)
+//  val totalCost = myOrder.billWithServiceCharge()
+//  println(f"Total bill with service charge: £${totalCost}%.2f")
+//
 
 }
 
 //no service charge on NOne
 //val optionalServ...using an Option to hold the service charge
 //total + serviceCharge //get total bil with S.Charge
-//Used of an optiomn double and if condition using { } invalid syntax
+//Used of an option double and if condition using { } invalid syntax
 //( method lower case)

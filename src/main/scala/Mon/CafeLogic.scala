@@ -25,7 +25,7 @@ class CafeLogic {
   def removeSpecial(name: String, menu: List[MenuItem]): List[MenuItem] = menu.filterNot(item => item.name.toLowerCase.contains(name.toLowerCase) && item.isSpecial)
   //"item" is newly named menu for menu item for simplicity, look at each menu item in turn, check the name matches and if marked IsSpecial remove.
   // SUMMARY: Filtering list to exclude specials
-//exact match, use .equalsIgnoreCase(name) to filer Mocha from Luxury Mocha
+  //exact match, use .equalsIgnoreCase(name) to filer Mocha from Luxury Mocha
 
   /** S T O C K  C O U N T **
    * If item is at stock count = 0 you cannot order it. When an item is bought, reduce the stock by -1
@@ -43,11 +43,8 @@ class CafeLogic {
     updatedStock //Return at end!
   }
 
-
-  /** B I L L ** TAKE CUSTOMER ORDER, GIVE ITEMISED BILL with a TOTAL
-   * Needs to accept the list of menu items and the customer order
-   * Look at each menu in the item
-   * Use of flat map to flatten any none result in final list */
+  /** B I L L ** GIVE ITEMISED BILL with a TOTAL
+   * Needs to accept the list of menu items and the customer order, look at each menu in the item, use of flat map to flatten any none result in final list */
 
   class Bill(itemisedBill: List[String], total: Double) //class represents a bill that contain 2 params: Itemised bill and total (Double)
 
@@ -64,46 +61,44 @@ class CafeLogic {
   }
 
   /** S E R V I C E  C H A R G E **
-   * Ability to custom additional service charge or instead? */
+   * Ability to custom additional service charge */
 
-  //  class Order(val menuList: List[MenuItem]) {
-  //    def getBillWithServiceCharge (): Double = {
-  //      val total = menuList.map(_.price).sum
-  //      val serviceCharge = if (menuItems.exists(_.isSpecial)) {
-  //        total * 0.25
-  //      } else if (menuItems.exists(_.category == "HotFood")) {
-  //        total * 0.20
-  //      } else if (menuItems.exists(_.category == "ColdFood")) {
-  //        total * 0.10
-  //      } else{
-  //        0.0
-  //    }
-  //      total + serviceCharge
-  //  }
-
-  class OrderList(val menuList: List[MenuItem]) {
-
-    def billWithServiceCharge(): Double = {
-      val total = menuList.map(_.price).sum
-
-
-      val optionalServiceCharge: Option[Double] =
-        if (menuList.exists(_.isSpecial)) Some(total * 0.25)
-        else if (menuList.exists(_.category == "HotFood")) Some(total * 0.20)
-        else if (menuList.exists(_.category == "ColdFood")) Some(total * 0.10)
-        else None
-
-      val serviceCharge = optionalServiceCharge.getOrElse(0.0)
-
-      total + serviceCharge
+  ////Menu is null
+  def getBillWithServiceCharge(menuList: List[MenuItem]): Double = {
+    val total = menuList.map(_.price).sum
+    val serviceCharge = if (menuItems.exists(_.isSpecial)) {
+      total * 0.25
+    } else if (menuItems.exists(_.category == "HotFood")) {
+      total * 0.20
+    } else if (menuItems.exists(_.category == "ColdFood")) {
+      total * 0.10
+    } else {
+      0.0
     }
+    total + serviceCharge
+  }
 
+////Menu is null
+//  def billWithServiceCharge(menuList: List[MenuItem]): Double = {
+//    val total = menuList.map(_.price).sum
+//    val optionalServiceCharge: Option[Double] =
+//      if (menuList.exists(_.isSpecial)) Some(total * 0.25)
+//      else if (menuList.exists(_.category == "HotFood")) Some(total * 0.20)
+//      else if (menuList.exists(_.category == "ColdFood")) Some(total * 0.10)
+//      else None
+//
+//    val serviceCharge = optionalServiceCharge.getOrElse(0.0)
+//
+//    total + serviceCharge
+//  }
+}
 
     object CafeLogic extends App {
 
       //ADD A SPECIAL (def addSpecial)
+      val bagel = MenuItem("Bagel", 5.50, "Lunch", isSpecial = true, 7)
       val cafe = new CafeLogic //instance of a class - Don't need 'new' for case class.
-      val addSpecial = cafe.addSpecial(MenuData.bagel, MenuData.menuItems) //added a bagel to addSpecial
+      val addSpecial = cafe.addSpecial(bagel, MenuData.menuItems) //added a bagel to addSpecial
       println(addSpecial)
 
       //REMOVE A SPECIAL (def removeSpecial)
@@ -119,7 +114,4 @@ class CafeLogic {
 
       //BILL (
 
-
     }
-  }
-}

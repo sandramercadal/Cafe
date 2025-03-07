@@ -8,7 +8,7 @@ class CafeLogicSpec extends AnyWordSpec with Matchers {
 
   val cafeLogic = new CafeLogic
 
-  //Define menu items, Wrap 🌯 & Luxury Hot choc ☕️ are special items
+  //Define menu items: Wrap🌯 & Luxury Hot choc☕️ are special items
   val Wrap = new MenuItem("Wrap", 5.00, "ColdFood", isSpecial = true, 12)
   val LuxuryHotChocolate = new MenuItem("Luxury Hot Chocolate", 4.75, "Drinks", isSpecial = true, 10)
 
@@ -26,7 +26,7 @@ class CafeLogicSpec extends AnyWordSpec with Matchers {
 
   val order: List[String] = List("Salad", "Hot Churros", "Salad") //Order with 3 string items for Bill testing incl. 2 Salads
 
-  val fullOrder: List[MenuItem] = List(Wrap, LuxuryHotChocolate, Donut, Coffee) //specials & non-spec mixed order
+  val fullOrder: List[MenuItem] = List(Wrap, LuxuryHotChocolate, Donut, Coffee) //specials & non-special mixed order
 
 
   //Test Case 1- can a special item (Wrap) be added to justDrinkOrder
@@ -143,15 +143,15 @@ class CafeLogicSpec extends AnyWordSpec with Matchers {
 
   /** B I L L **
    Gives a memory location not 16.50**/
-//    "getBill" should {
-//      "provide correct itemised bill for correct order" in {
-//        val letsOrder = List("Salad", "Hot Churros", "Salad")
-//        val bill = cafeLogic.GetCustomerBill(order)
-//        val expectedItemisedBill = List("Salad: £5.50", "Hot churros: £5.50", "Salad: £5.50")
-//        val expectedTotalBill = 16.50
-//        bill shouldBe expectedTotalBill
-//      }
-//    }
+    "getBill" should {
+      "provide correct itemised bill for correct order" in {
+        val letsOrder = List("Salad", "Hot Churros", "Salad")
+        val bill = cafeLogic.GetCustomerBill(order)
+        val expectedItemisedBill = List("Salad: £5.50", "Hot churros: £5.50", "Salad: £5.50")
+        val expectedTotalBill = 16.50
+        bill shouldBe expectedTotalBill
+      }
+    }
 
   /** Further tests for Bill can be:
    * 1.
