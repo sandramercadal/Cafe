@@ -1,5 +1,6 @@
 import Mon.MenuData.menuItems
 
+
 val order: List [String] = List ("Salad", "Churros", "Salad")
 
 order.flatMap { itemName => menuItems }
@@ -27,5 +28,10 @@ def GetCustomerBill(order: List[String]): Bill =  {
 
   val totalCost = priceTotal.sum
   new Bill (itemisedBill, totalCost)
+
+
+
+
+
 }
 

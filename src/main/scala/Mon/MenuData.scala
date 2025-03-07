@@ -10,18 +10,20 @@ class MenuData (val menuItems: List[MenuItem]) //my class takes a parameter of m
 object MenuData {
   val menuItems: List[MenuItem] = List (
     MenuItem ("Croissant", 2.50, "ColdFood", isSpecial = false, 10),
-    MenuItem ("bagel", 2.00, "ColdFood", isSpecial = false, 10),
+    MenuItem ("Bagel", 2.00, "ColdFood", isSpecial = false, 10),
     MenuItem ("Donut", 2.50, "ColdFood", isSpecial = false, 12),
     MenuItem ("Wrap", 5.00, "ColdFood", isSpecial = false, 12),
     MenuItem ("Salad", 5.50, "ColdFood", isSpecial = false, 6),
     MenuItem ("Mocha", 3.50, "Drinks", isSpecial = false, 15),
     MenuItem ("Espresso", 2.50, "Drinks", isSpecial = false, 25),
-    MenuItem ("latte", 3.50, "Drinks", isSpecial = false, 30),
+    MenuItem ("Latte", 3.50, "Drinks", isSpecial = false, 30),
     MenuItem ("Americano", 3.50, "Drinks", isSpecial = false, 30),
     MenuItem ("Hot Chocolate", 3.50, "Drinks", isSpecial = false, 15),
     MenuItem ("Quiche", 5.50, "HotFood", isSpecial = false, 7),
     MenuItem ("Hot Churros", 5.50, "HotFood", isSpecial = false, 0),
-    MenuItem ("Chorizo Bap", 5.50, "Hot Food", isSpecial = false, 0),
+    MenuItem ("Chorizo Bap", 5.50, "HotFood", isSpecial = false, 0),
+    MenuItem ("Luxury Mocha", 4.00, "Drinks", isSpecial = true, 10),
+    MenuItem ("Sangria", 4.50, "Drinks", isSpecial = true, 25),
   )
 
   //true values

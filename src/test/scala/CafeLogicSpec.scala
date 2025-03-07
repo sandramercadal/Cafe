@@ -2,11 +2,13 @@ import Mon.{CafeLogic, MenuData, MenuItem}
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 
+import scala.reflect.internal.Chars.isSpecial
+
 class CafeLogicSpec extends AnyWordSpec with Matchers {
 
   val cafeLogic = new CafeLogic
 
-  //Define menu items, Wrap and Luxury Hot choc are special items
+  //Define menu items, Wrap 🌯 and Luxury Hot choc ☕️ are special items
   val Wrap = new MenuItem("Wrap", 5.00, "ColdFood", isSpecial = true, 12)
   val LuxuryHotChocolate = new MenuItem("Luxury Hot Chocolate", 4.75, "Drinks", isSpecial = true, 10)
 
@@ -14,15 +16,19 @@ class CafeLogicSpec extends AnyWordSpec with Matchers {
   val Coffee = new MenuItem("Coffee", 2.50, "Drinks", isSpecial = false, 30)
   val HotChocolate = new MenuItem("Hot Chocolate", 3.50, "Drinks", isSpecial = false, 15)
   val Mocha = new MenuItem("Mocha", 3.50, "Drinks", isSpecial = false, 15)
+  val Salad = new MenuItem("Salad", 5.50, "ColdFood", isSpecial = false, 6)
+  val HotChurros = new MenuItem("Hot Churros", 5.50, "HotFood", isSpecial = false, 0)
+
+  //Represents initial orders
+  val justDrinkOrder: List[MenuItem] = List(Coffee)
 
   val emptyOrder: List[MenuItem] = List()
 
-  //Represents initial order
-  val justDrinkOrder: List[MenuItem] = List(Coffee)
+  val order: List[String] = List("Salad", "Hot Churros", "Salad") //Order with 3 string items for Bill testing incl. 2 Salads
 
-  val order: List[String] = List("Salad", "Hot Churros", "Salad") //Bill testing
+  val fullOrder: List[MenuItem] = List(Wrap, LuxuryHotChocolate, Donut, Coffee) //specials & non-spec mixed order
 
-  //MY TESTS FOR MENU 8 of 8 run
+
   //Test Case 1- can a special item (Wrap) be added to justDrinkOrder
   "addSpecial" should {
     "test if a special item has been added to order" in {
@@ -110,35 +116,47 @@ class CafeLogicSpec extends AnyWordSpec with Matchers {
     }
   }
 
+  //Test Case 9- Test to remove one special item
+  "removeSpecial" should {
+    "test if a special item can be removed from the order" in {
+      val updatedOrder = cafeLogic.removeSpecial("Wrap", fullOrder)
+      val expectedResult = List(LuxuryHotChocolate, Donut, Coffee)
+      updatedOrder shouldBe expectedResult
+
+    }
+  }
+
   /** Stock* */
   //Test Case 1- Test that STOCK can decrease when non-special item is bought by customer
   "customerOrderFromMenu" should {
     "test if the stock decreases when an item is ordered" in {
       val initialOrder = List(MenuItem("Salad", 5.50, "ColdFood", isSpecial = false, stock = 6))
       val updatedOrder = cafeLogic.customerOrderFromMenu("Salad", initialOrder)
-      val expectedResult = List(MenuItem("Salad", 5.50, "ColdFood", isSpecial = false, stock = 5))
+      val expectedResult = List(MenuItem("Salad", 5.50, "ColdFood", isSpecial = false, stock = 5)) //Now 5 not 6
       updatedOrder shouldBe expectedResult
     }
   }
+
   /** Further tests for stock can be:
    * A test that should pass if it does not decrease stock if item is out of stock
    * A test for stock should not change if it is not ordered
-   * Test if the ordered item is out of stock.
    */
 
-  //MY TESTS FOR BILL
-//  "getBill" should {
-//    "provide correct itemised bill for correct items ordered" in {
-//      val customerOrder = List("Salad", "Hot Churros", "Salad")
-//      val bill = GetCustomerBill(order)
-//      val expectedItemisedBill = List("Salad: £5.50", "Hot churros: £5.50", "Salad: £5.50")
-//      customerOrder shouldBe expectedItemisedBill
+  /** B I L L **
+   Gives a memory location not 16.50**/
+//    "getBill" should {
+//      "provide correct itemised bill for correct order" in {
+//        val letsOrder = List("Salad", "Hot Churros", "Salad")
+//        val bill = cafeLogic.GetCustomerBill(order)
+//        val expectedItemisedBill = List("Salad: £5.50", "Hot churros: £5.50", "Salad: £5.50")
+//        val expectedTotalBill = 16.50
+//        bill shouldBe expectedTotalBill
+//      }
 //    }
-//  }
 
   /** Further tests for stock can be:
-   1. Test if an empty order returns an empty bill
-  2. Test if an item ordered not on the menu is ignored
+   * 1. Test if an empty order returns an empty bill
+   * 2. Test if an item ordered not on the menu is ignored
    */
 
 
