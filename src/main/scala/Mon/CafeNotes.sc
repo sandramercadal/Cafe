@@ -16,8 +16,8 @@
 
  *Q2//This is like the kennel example where we added on cats and birds to the kennel :+
  //that I also did last weekend
- * Add Premium Specials - see CafeLogic - DONE
- *Remove Premium Specials - see CafeLogic - DONE
+ * Add Premium Specials - see CafeLogic
+ *Remove Premium Specials - see CafeLogic
 
  *Q3
 *Track inventory/Stock count of menu items

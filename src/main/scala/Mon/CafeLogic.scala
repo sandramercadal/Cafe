@@ -17,10 +17,11 @@ class CafeLogic {
    * match names to lower case names for all edge cases
    * Helps the cafe remove something by just entering the name if item instead of having to type out all corresponding info
    * Wanted to use filternot
-   * As I have two bagels in my menu it removed the one on special not the normal one from the menu - WIN
+   * As I had two bagels in my menu it removed the one on special not the normal one from the menu - WIN
    * method coded in 1 line */
 
   def removeSpecial(name: String, menu: List[MenuItem]): List[MenuItem] = menu.filterNot(item => item.name.toLowerCase.contains(name.toLowerCase) && item.isSpecial)
+
  // "item" is newly named menu for menu item for simplicity, look at each menu item in turn, check the name matches and if marked IsSpecial remove.
  //  SUMMARY: Filtering list to exclude specials
  // exact match, use .equalsIgnoreCase(name) to filer Mocha from Luxury Mocha
@@ -48,16 +49,16 @@ class CafeLogic {
 
   class Bill(itemisedBill: List[String], total: Double) //class represents a bill that contain 2 params: Itemised bill and total (Double)
 
-  def GetCustomerBill(order: List[String]): Bill = { //
+  def GetCustomerBill(order: List[String]): Bill = { //Return an instance of Bill class
 
-    val itemisedBill = order.flatMap { itemName => //use flatmap to flatten
+    val itemisedBill = order.flatMap { itemName => //use flatmap to flatten results of order list therefore a single list of strings
       menuItems.find(_.name.equalsIgnoreCase(itemName)).map { item => //search for a matching item in MenuItems & do a case-insensitive match
-        s"${item.name}: £${item.price}"
+        s"${item.name}: £${item.price}"  //format strings for itemised bill
       }
     }
     val priceTotal = order.map { itemName => menuItems.find(_.name.equalsIgnoreCase(itemName)).map { item => item.price }.sum }
     val totalCost = priceTotal.sum
-    new Bill(itemisedBill, totalCost)
+    new Bill(itemisedBill, totalCost)  //creates a new instance of Bill class with itemised list and total cost
   }
 
 
@@ -65,21 +66,21 @@ class CafeLogic {
    * Ability to custom additional service charge */
 
   ////Menu is null
-  //  def getBillWithServiceCharge(menuList: List[MenuItem]): Double = {
-  //    val total = menuList.map(_.price).sum
-  //    val serviceCharge = if (menuItems.exists(_.isSpecial)) {
-  //      total * 0.25
-  //    } else if (menuItems.exists(_.category == "HotFood")) {
-  //      total * 0.20
-  //    } else if (menuItems.exists(_.category == "ColdFood")) {
-  //      total * 0.10
-  //    } else {
-  //      0.0
-  //    }
-  //    total + serviceCharge
-  //  }
+//    def getBillWithServiceCharge(menuList: List[MenuItem]): Double = {
+//      val total = menuList.map(_.price).sum
+//      val serviceCharge = if (menuItems.exists(_.isSpecial)) {
+//        total * 0.25
+//      } else if (menuItems.exists(_.category == "HotFood")) {
+//        total * 0.20
+//      } else if (menuItems.exists(_.category == "ColdFood")) {
+//        total * 0.10
+//      } else {
+//        0.0
+//      }
+//      total + serviceCharge
+//    }
 
-  ////Menu is null
+  /** Try an Option to better handle my null /better handle missing values safely  */
 //  def billWithServiceCharge(menuList: List[MenuItem]): Double = {
 //    val total = menuList.map(_.price).sum
 //    val optionalServiceCharge: Option[Double] =
@@ -92,7 +93,7 @@ class CafeLogic {
 //
 //    total + serviceCharge
 //  }
-
+//  //Menu is null
 
 }
 
