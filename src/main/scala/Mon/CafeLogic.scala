@@ -47,16 +47,15 @@ class CafeLogic {
   /** 4️⃣ B I L L ** GIVE ITEMISED BILL with a TOTAL
    * Needs to accept the list of menu items and the customer order, look at each menu in the item, use of flat map to flatten any none result in final list */
 
-  class Bill(itemisedBill: List[String], total: Double) //class represents a bill that contain 2 params: Itemised bill and total (Double)
+  class Bill(val itemisedBill: List[String], val total: Double) //class represents a bill that contain 2 params: Itemised bill and total (Double)
 
   def GetCustomerBill(order: List[String]): Bill = { //Return an instance of Bill class
-
     val itemisedBill = order.flatMap { itemName => //use flatmap to flatten results of order list therefore a single list of strings
-      menuItems.find(_.name.equalsIgnoreCase(itemName)).map { item => //search for a matching item in MenuItems & do a case-insensitive match
+      MenuData.menuItems.find(_.name.equalsIgnoreCase(itemName)).map { item => //search for a matching item in MenuItems & do a case-insensitive match
         s"${item.name}: £${item.price}"  //format strings for itemised bill
       }
     }
-    val priceTotal = order.map { itemName => menuItems.find(_.name.equalsIgnoreCase(itemName)).map { item => item.price }.sum }
+    val priceTotal = order.map { itemName => MenuData.menuItems.find(_.name.equalsIgnoreCase(itemName)).map { item => item.price }.getOrElse(0.0) }
     val totalCost = priceTotal.sum
     new Bill(itemisedBill, totalCost)  //creates a new instance of Bill class with itemised list and total cost
   }

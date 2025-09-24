@@ -147,9 +147,9 @@ class CafeLogicSpec extends AnyWordSpec with Matchers {
       "provide correct itemised bill for correct order" in {
         val letsOrder = List("Salad", "Hot Churros", "Salad")
         val bill = cafeLogic.GetCustomerBill(order)
-        val expectedItemisedBill = List("Salad: £5.50", "Hot churros: £5.50", "Salad: £5.50")
+        //val expectedItemisedBill = List("Salad: £5.50", "Hot Churros: £5.50", "Salad: £5.50")
         val expectedTotalBill = 16.50
-        bill shouldBe expectedTotalBill
+        bill.total shouldBe expectedTotalBill
       }
     }
 

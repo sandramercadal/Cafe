@@ -27,6 +27,17 @@
 /** Take customer orders
  * Add up the total
  * Add an optional service charge
+ *
+At first I was getting a memory location instead of £16.50. In Scala when you create a class eg
+ class Bill(itemisedBill: List[String], total: Double)
+those params are provate so cannot be accessed from the outside. SO adding a va makes them public ->
+ class Bill(val itemisedBill: List[String], val total: Double)
+ *
+ The other issue I had was that I originally had.sum here at the end:
+ order.map { itemName =>
+ menuItems.find(_.name.equalsIgnoreCase(itemName)).map { item => item.price }.sum
+ }
+
  * */
 
 
