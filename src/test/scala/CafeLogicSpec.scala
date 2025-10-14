@@ -29,7 +29,7 @@ class CafeLogicSpec extends AnyWordSpec with Matchers {
   val fullOrder: List[MenuItem] = List(Wrap, LuxuryHotChocolate, Donut, Coffee) //specials & non-special mixed order
 
 
-  //Test Case 1- can a special item (Wrap) be added to justDrinkOrder
+  //Test Case 1- can a special item (Wrap see line 12 & 13) be added to justDrinkOrder
   "addSpecial" should {
     "test if a special item has been added to order" in {
       val addAWrap = cafeLogic.addSpecial(Wrap, justDrinkOrder) //call it
@@ -136,22 +136,23 @@ class CafeLogicSpec extends AnyWordSpec with Matchers {
       updatedOrder shouldBe expectedResult
     }
   }
+
   /** Further tests for stock can be:
    * A test that should pass if it does not decrease stock if item is out of stock
    * A test for stock should not change if it is not ordered
    */
 
   /** B I L L **
-   Gives a memory location not 16.50**/
-    "getBill" should {
-      "provide correct itemised bill for correct order" in {
-        val letsOrder = List("Salad", "Hot Churros", "Salad")
-        val bill = cafeLogic.GetCustomerBill(order)
-        //val expectedItemisedBill = List("Salad: £5.50", "Hot Churros: £5.50", "Salad: £5.50")
-        val expectedTotalBill = 16.50
-        bill.total shouldBe expectedTotalBill
-      }
+   * Test case 1 * */
+  "getBill" should {
+    "provide correct itemised bill for correct order" in {
+      val letsOrder = List("Salad", "Hot Churros", "Salad")
+      val bill = cafeLogic.GetCustomerBill(order)
+      //val expectedItemisedBill = List("Salad: £5.50", "Hot Churros: £5.50", "Salad: £5.50")
+      val expectedTotalBill = 16.50
+      bill.total shouldBe expectedTotalBill
     }
+  }
 
   /** S E R V I C E  C H A R G E **
    * 1: Total with just drinks
@@ -159,11 +160,37 @@ class CafeLogicSpec extends AnyWordSpec with Matchers {
    * 3. Total with hot food and drinks (20%)
    * 4. Total of special food and drinks (25%)
    * 5. Total with custom service charge
-   */
+ *
+ *
+ * Test 1 - Just drinks ordered so 0% service charge */
+  "getBillWithServiceCharge" should {
+    "calculate correct total for drinks only" in {
+      val result = cafeLogic.getBillWithServiceCharge(justDrinkOrder)
+      result shouldBe 2.50 // Just Coffee: 2.50 + 0% = 2.50
+    }
 
+    /** Test 2: Cold food + drinks so 10% service charge) */
+    "getBillWithServiceCharge" should {
+      "calculate correct total with cold food" in {
+        val coldFoodOrder = List(Salad, Coffee) // 5.50 + 2.50 = 8.00
+        val result = cafeLogic.getBillWithServiceCharge(coldFoodOrder)
+        result shouldBe 8.80 // 8.00 + 10% = 8.80
+      }
 
+      /** Test 3: Hot food + drinks so 20% service charge) */
+      "calculate correct total with hot food" in {
+        val hotFoodOrder = List(HotChurros, Coffee) // 5.50 + 2.50 = 8.00
+        val result = cafeLogic.getBillWithServiceCharge(hotFoodOrder)
+        result shouldBe 9.60 // 8.00 + 20% = 9.60
+      }
 
+      /** Test 4: Special items (25% service charge) - uses your fullOrder */
+      "calculate correct total with special items" in {
+        val result = cafeLogic.getBillWithServiceCharge(fullOrder) // Wrap(5.00) + LuxuryHotChocolate(4.75) + Donut(2.50) + Coffee(2.50) = 14.75
+        result shouldBe 18.4375 // 14.75 + 25% = 18.43
+      }
+    }
+  }
 }
-
 
 

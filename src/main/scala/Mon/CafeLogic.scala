@@ -3,7 +3,7 @@ import Mon.MenuData.menuItems
 
 
 //CafeLogic class - a Single responsibility for all the operation I want to perform on MenuData
-//Reusable if in further the cafe wants to expand its operations & manage diff menus or cafes
+//Reusable if in future the cafe wants to expand its operations & manage diff menus or cafes
 class CafeLogic {
 
   /** 1️⃣ A D D  S P E C I A L to menu** e.g Luxury Hot Choc ☕️ */
@@ -64,20 +64,20 @@ class CafeLogic {
   /** 5️⃣ S E R V I C E  C H A R G E **
    * Ability to custom additional service charge */
 
-  ////Menu is null
-//    def getBillWithServiceCharge(menuList: List[MenuItem]): Double = {
-//      val total = menuList.map(_.price).sum
-//      val serviceCharge = if (menuItems.exists(_.isSpecial)) {
-//        total * 0.25
-//      } else if (menuItems.exists(_.category == "HotFood")) {
-//        total * 0.20
-//      } else if (menuItems.exists(_.category == "ColdFood")) {
-//        total * 0.10
-//      } else {
-//        0.0
-//      }
-//      total + serviceCharge
-//    }
+    def getBillWithServiceCharge(menuList: List[MenuItem]): Double = {
+      val total = menuList.map(_.price).sum
+
+      val serviceCharge = if (menuList.exists(_.isSpecial)) {
+        total * 0.25
+      } else if (menuList.exists(_.category == "HotFood")) {
+        total * 0.20
+      } else if (menuList.exists(_.category == "ColdFood")) {
+        total * 0.10
+      } else {
+        0.0
+      }
+      total + serviceCharge
+    }
 
   /** Try an Option to better handle my null /better handle missing values safely  */
 //  def billWithServiceCharge(menuList: List[MenuItem]): Double = {
