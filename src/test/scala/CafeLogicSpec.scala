@@ -2,32 +2,38 @@ import Mon.{CafeLogic, MenuData, MenuItem}
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 
+import scala.reflect.internal.Chars.isSpecial
+
 class CafeLogicSpec extends AnyWordSpec with Matchers {
 
   val cafeLogic = new CafeLogic
 
-  //Define 3 menu items, Wrap and Luxury Hot choc are special items
-  val HotChocolate = new MenuItem("Hot Chocolate", 3.50, "Beverages", isSpecial = false, 15)
-  val LuxuryHotChocolate = new MenuItem("Luxury Hot Chocolate", 4.75, "Beverages", isSpecial = true, 10)
-  val Donut = new MenuItem("Donut", 2.50, "Bakery", isSpecial = false, 12)
-  val Coffee = new MenuItem("Coffee", 2.50, "Beverages", isSpecial = false, 30)
-  val Wrap = new MenuItem("Wrap", 5.00, "Lunch", isSpecial = true, 12)
+  //Define menu items: Wrap🌯 & Luxury Hot choc☕️ are special items
+  val Wrap = new MenuItem("Wrap", 5.00, "ColdFood", isSpecial = true, 12)
+  val LuxuryHotChocolate = new MenuItem("Luxury Hot Chocolate", 4.75, "Drinks", isSpecial = true, 10)
+
+  val Donut = new MenuItem("Donut", 2.50, "ColdFood", isSpecial = false, 12)
+  val Coffee = new MenuItem("Coffee", 2.50, "Drinks", isSpecial = false, 30)
+  val HotChocolate = new MenuItem("Hot Chocolate", 3.50, "Drinks", isSpecial = false, 15)
+  val Mocha = new MenuItem("Mocha", 3.50, "Drinks", isSpecial = false, 15)
+  val Salad = new MenuItem("Salad", 5.50, "ColdFood", isSpecial = false, 6)
+  val HotChurros = new MenuItem("Hot Churros", 5.50, "HotFood", isSpecial = false, 0)
+
+  //Represents initial orders
+  val justDrinkOrder: List[MenuItem] = List(Coffee)
+
+  val emptyOrder: List[MenuItem] = List()
+
+  val order: List[String] = List("Salad", "Hot Churros", "Salad") //Order with 3 string items for Bill testing incl. 2 Salads
+
+  val fullOrder: List[MenuItem] = List(Wrap, LuxuryHotChocolate, Donut, Coffee) //specials & non-special mixed order
 
 
-  //Represents initial order
-  val justDrinkOrder: List[MenuItem] = List(HotChocolate)
-
-
-  //caps, lowercase, same name, if you a
-
-
-
-  //MY TESTS
-  //Test Case 1- can a special item (Wrap) be added to justDrinkOrder
+  //Test Case 1- can a special item (Wrap see line 12 & 13) be added to justDrinkOrder
   "addSpecial" should {
     "test if a special item has been added to order" in {
       val addAWrap = cafeLogic.addSpecial(Wrap, justDrinkOrder) //call it
-      val expectedResult = List(HotChocolate, Wrap)
+      val expectedResult = List(Coffee, Wrap)
       addAWrap shouldBe expectedResult
     }
   }
@@ -36,7 +42,7 @@ class CafeLogicSpec extends AnyWordSpec with Matchers {
   "addNonSpecial" should {
     "test if a non special item has been added to the order" in {
       val addADonut = cafeLogic.addSpecial(Donut, justDrinkOrder) //call it
-      val expectedResult = List(HotChocolate, Donut)
+      val expectedResult = List(Coffee, Donut)
       addADonut shouldBe expectedResult
     }
   }
@@ -45,17 +51,28 @@ class CafeLogicSpec extends AnyWordSpec with Matchers {
   "addMultipleSpecials" should {
     "test if more than one special item has been added to the order" in {
       val addWrap = cafeLogic.addSpecial(Wrap, justDrinkOrder) //call it
-      val addLuxuryHotChoc = cafeLogic.addSpecial(LuxuryHotChocolate, justDrinkOrder) //call it
-      val expectedResult = List(Wrap, LuxuryHotChocolate, HotChocolate)
+      val expectedResult = List(Coffee, Wrap)
+      addWrap shouldBe expectedResult
+    }
+    "test if another special item has been added to the order" in {
+      val addLuxuryHotChocolate = cafeLogic.addSpecial(LuxuryHotChocolate, justDrinkOrder) //call it
+      val expectedResult = List(Coffee, LuxuryHotChocolate)
+      addLuxuryHotChocolate shouldBe expectedResult
     }
   }
 
   //Test Case 4- Can multiple non-specials be added to JustDrinkOrder
   "addMultipleNonSpecials" should {
-    "test if more than one non-special item has been added to the order" in {
+
+    "test if more than one non-special item (Donut) has been added to the order" in {
       val addADonut = cafeLogic.addSpecial(Donut, justDrinkOrder) //call it
-      val addCoffee = cafeLogic.addSpecial(Coffee, justDrinkOrder) //call it
-      val expectedResult = List(Coffee, Donut, HotChocolate)
+      val expectedResult = List(Coffee, Donut)
+      addADonut shouldBe expectedResult
+    }
+    "test if more than one non-special item in addition (Mocha) has been added to the order" in {
+      val addMocha = cafeLogic.addSpecial(Mocha, justDrinkOrder) //call it
+      val expectedResult = List(Coffee, Mocha)
+      addMocha shouldBe expectedResult
     }
   }
 
@@ -65,6 +82,7 @@ class CafeLogicSpec extends AnyWordSpec with Matchers {
       val emptyOrder: List[MenuItem] = List()
       val addAWrap = cafeLogic.addSpecial(Wrap, emptyOrder)
       val expectedResult = List(Wrap)
+      addAWrap shouldBe expectedResult
     }
   }
 
@@ -72,50 +90,107 @@ class CafeLogicSpec extends AnyWordSpec with Matchers {
   "addNonSpecialToEmptyOrder" should {
     "test if a non-special can be added to an empty order" in {
       val emptyOrder: List[MenuItem] = List()
-      val addAWrap = cafeLogic.addSpecial(Coffee, emptyOrder)
+      val addACoffee = cafeLogic.addSpecial(Coffee, emptyOrder)
       val expectedResult = List(Coffee)
+      addACoffee shouldBe expectedResult
     }
   }
 
   //Test Case 7- Test adding more than one non-special item as customer may want 2 donuts etc
   "addAnotherNonSpecial" should {
-    "test if the non-special same item can be added to order as customer may want more than 1" in {
+    "test if more than 1 of the same item can be added to order as customer may want more than 1" in {
       val addADonut = cafeLogic.addSpecial(Donut, justDrinkOrder) //call it
       val addAnotherDonut = cafeLogic.addSpecial(Donut, addADonut) //call it
-      val expectedResult = List(Donut, Donut, HotChocolate)
+      val expectedResult = List(Coffee, Donut, Donut)
+      addAnotherDonut shouldBe expectedResult
     }
   }
 
   //Test Case 8- Test adding more than one special item as customer may want 2 wraps
   "addAnotherSpecial" should {
-    "test if the special same item can be added to order as customer may want more than 1" in {
+    "test if more than 1 of the same special item can be added to order as customer may want more than 1" in {
       val addAWrap = cafeLogic.addSpecial(Wrap, justDrinkOrder) //call it
       val addAnotherWrap = cafeLogic.addSpecial(Wrap, addAWrap) //call it
-      val expectedResult = List(Wrap, Wrap, HotChocolate)
+      val expectedResult = List(Coffee, Wrap, Wrap)
+      addAnotherWrap shouldBe expectedResult
     }
   }
 
-//Test Case 9- FAILS
-  //"outOfStock" should {
-    //"test if the ordered item is out of stock" in {
-      //val outOfStockItem = new MenuItem ("Bun", 5.00, "Lunch", isSpecial = true, 0) //out of stock
-      //val orderABun : List[MenuItem] = List (outOfStockItem) //new order woth out of stock item
-      //assertThrows[outOfStockItem] {
-        //cafeLogic.addSpecial(outOfStockItem, justDrinkOrder)
+  //Test Case 9- Test to remove one special item
+  "removeSpecial" should {
+    "test if a special item can be removed from the order" in {
+      val updatedOrder = cafeLogic.removeSpecial("Wrap", fullOrder)
+      val expectedResult = List(LuxuryHotChocolate, Donut, Coffee)
+      updatedOrder shouldBe expectedResult
 
+    }
+  }
 
-  //EDGE CASE - FAILS
-  //Test Case 10- Add an invalid menu item / Out of stock
-  //There is a method called assertThrows[IllegalArgumentException]
-  //"InvalidMenuItem" should {
-//"test if adding an item which is out of stock or null returns an error" in {
-  //assertThrows[IllegalArgumentException] {
-    //cafeLogic.addSpecial(null, justDrinkOrder) //
+  /** Stock* */
+  //Test Case 1- Test that STOCK can decrease when non-special item is bought by customer
+  "customerOrderFromMenu" should {
+    "test if the stock decreases when an item is ordered" in {
+      val initialOrder = List(MenuItem("Salad", 5.50, "ColdFood", isSpecial = false, stock = 6))
+      val updatedOrder = cafeLogic.customerOrderFromMenu("Salad", initialOrder)
+      val expectedResult = List(MenuItem("Salad", 5.50, "ColdFood", isSpecial = false, stock = 5)) //Now 5 not 6
+      updatedOrder shouldBe expectedResult
+    }
+  }
 
+  /** Further tests for stock can be:
+   * A test that should pass if it does not decrease stock if item is out of stock
+   * A test for stock should not change if it is not ordered
+   */
 
+  /** B I L L **
+   * Test case 1 * */
+  "getBill" should {
+    "provide correct itemised bill for correct order" in {
+      val letsOrder = List("Salad", "Hot Churros", "Salad")
+      val bill = cafeLogic.GetCustomerBill(order)
+      //val expectedItemisedBill = List("Salad: £5.50", "Hot Churros: £5.50", "Salad: £5.50")
+      val expectedTotalBill = 16.50
+      bill.total shouldBe expectedTotalBill
+    }
+  }
 
+  /** S E R V I C E  C H A R G E **
+   * 1: Total with just drinks
+   * 2. Total with cold food and drinks (10%)
+   * 3. Total with hot food and drinks (20%)
+   * 4. Total of special food and drinks (25%)
+   * 5. Total with custom service charge
+ *
+ *
+ * Test 1 - Just drinks ordered so 0% service charge */
+  "getBillWithServiceCharge" should {
+    "calculate correct total for drinks only" in {
+      val result = cafeLogic.getBillWithServiceCharge(justDrinkOrder)
+      result shouldBe 2.50 // Just Coffee: 2.50 + 0% = 2.50
+    }
 
+    /** Test 2: Cold food + drinks so 10% service charge) */
+    "getBillWithServiceCharge" should {
+      "calculate correct total with cold food" in {
+        val coldFoodOrder = List(Salad, Coffee) // 5.50 + 2.50 = 8.00
+        val result = cafeLogic.getBillWithServiceCharge(coldFoodOrder)
+        result shouldBe 8.80 // 8.00 + 10% = 8.80
+      }
 
+      /** Test 3: Hot food + drinks so 20% service charge) */
+      "calculate correct total with hot food" in {
+        val hotFoodOrder = List(HotChurros, Coffee) // 5.50 + 2.50 = 8.00
+        val result = cafeLogic.getBillWithServiceCharge(hotFoodOrder)
+        result shouldBe 9.60 // 8.00 + 20% = 9.60
+      }
+
+      /** Test 4: Special items (25% service charge) - uses your fullOrder */
+      "calculate correct total with special items" in {
+        val result = cafeLogic.getBillWithServiceCharge(fullOrder) // Wrap(5.00) + LuxuryHotChocolate(4.75) + Donut(2.50) + Coffee(2.50) = 14.75
+        result shouldBe 18.4375 // 14.75 + 25% = 18.43
+      }
+    }
+  }
 }
 
 

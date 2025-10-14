@@ -16,8 +16,8 @@
 
  *Q2//This is like the kennel example where we added on cats and birds to the kennel :+
  //that I also did last weekend
- * Add Premium Specials - see CafeLogic - DONE
- *Remove Premium Specials - see CafeLogic - DONE
+ * Add Premium Specials - see CafeLogic
+ *Remove Premium Specials - see CafeLogic
 
  *Q3
 *Track inventory/Stock count of menu items
@@ -27,6 +27,20 @@
 /** Take customer orders
  * Add up the total
  * Add an optional service charge
+ *
+At first I was getting a memory location instead of £16.50. In Scala when you create a class eg
+ class Bill(itemisedBill: List[String], total: Double)
+those params are private so cannot be accessed from the outside. So adding "val" to all the params (itemisedBill and total) makes them public ->
+ class Bill(val itemisedBill: List[String], val total: Double)
+ *
+ The other issue I had was that I originally had .sum here at the end:
+ order.map { itemName =>
+ menuItems.find(_.name.equalsIgnoreCase(itemName)).map { item => item.price }.sum
+ }
+This became => val priceTotal = order.map { itemName => MenuData.menuItems.find(_.name.equalsIgnoreCase(itemName)).map { item => item.price }.getOrElse(0.0) }
+
+ .getOrElse() is the safe way to unwrap an option with a fallback value
+
  * */
 
 
